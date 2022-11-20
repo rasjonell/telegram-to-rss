@@ -1,5 +1,4 @@
-import { TelegramService } from 'types/global';
-import { NarrowedContext, Telegraf, Telegram } from 'telegraf';
+import { Context, NarrowedContext, Telegraf, Telegram } from 'telegraf';
 import { Message, PhotoSize, Update } from 'telegraf/typings/core/types/typegram';
 
 import * as Feed from './feed';
@@ -7,12 +6,12 @@ import * as Feed from './feed';
 const CHAT_ID = process.env.GROUP_ID;
 const CHAT_NAME = process.env.GROUP_USERNAME;
 
+const Bot = new Telegraf(process.env.BOT_TOKEN);
 const TelegramClient = new Telegram(process.env.BOT_TOKEN);
-const Bot = new Telegraf<TelegramService.CustomContext>(process.env.BOT_TOKEN);
 
 const withValidation = <
   T extends NarrowedContext<
-    TelegramService.CustomContext,
+    Context,
     {
       update_id: any;
       message: Update.New & Update.NonChannel & (Message.TextMessage | Message.PhotoMessage);
@@ -22,8 +21,6 @@ const withValidation = <
   ctx: T,
   cb: (ctx: T) => any,
 ) => {
-  console.log(ctx);
-
   if (
     ctx.chat.id !== +CHAT_ID ||
     ctx.chat.type === 'private' ||

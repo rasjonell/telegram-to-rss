@@ -13,7 +13,7 @@ const feed = new Feed({
   copyright: '2022 Gurgen Hayrapetyan',
   pubDate: new Date().toLocaleString('en'),
   feed_url: 'http://localhost:4444/rss.xml',
-  description: `RSS Feed for Telegram chanel: ${CHAT_NAME}`,
+  description: `RSS Feed for Telegram channel: ${CHAT_NAME}`,
 });
 
 export const addItem = async (item: Parameters<typeof feed['item']>[0]) => {

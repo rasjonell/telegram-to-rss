@@ -2,10 +2,12 @@ import { TelegramService } from 'types/global';
 import { NarrowedContext, Telegraf, Telegram } from 'telegraf';
 import { Message, PhotoSize, Update } from 'telegraf/typings/core/types/typegram';
 
+import * as Feed from './feed';
+
 const CHAT_ID = process.env.GROUP_ID;
 const CHAT_NAME = process.env.GROUP_USERNAME;
 
-const TelegramClient = new Telegram(process.env.BOkT_TOKEN);
+const TelegramClient = new Telegram(process.env.BOT_TOKEN);
 const Bot = new Telegraf<TelegramService.CustomContext>(process.env.BOT_TOKEN);
 
 const withValidation = <
@@ -39,29 +41,35 @@ const getImageURL = async (photos: PhotoSize[]): Promise<string> => {
   return photoData.toString();
 };
 
-Bot.start((ctx) => {
-  ctx.sendMessage('hello there');
-});
-
 Bot.on('text', (ctx) =>
   withValidation(ctx, (ctx) => {
-    const content = ctx.message.text;
-    const pubDate = new Date(ctx.message.date);
-    const itemURL = `https://t.me/${CHAT_NAME}/${ctx.message.message_id}`;
+    const description = ctx.message.text;
+    const date = new Date(ctx.message.date * 1000);
+    const url = `https://t.me/${CHAT_NAME}/${ctx.message.forward_from_message_id}`;
 
-    console.log('text', content, pubDate, itemURL);
+    Feed.addItem({
+      url,
+      date,
+      description,
+      title: `${date.toLocaleDateString('en', { dateStyle: 'medium' })} on ${CHAT_NAME}`,
+    });
   }),
 );
 
 Bot.on('photo', (ctx) =>
   withValidation(ctx, async (ctx) => {
-    const pubDate = new Date(ctx.message.date);
-    const itemURL = `https://t.me/${CHAT_NAME}/${ctx.message.message_id}`;
+    const date = new Date(ctx.message.date * 1000);
+    const url = `https://t.me/${CHAT_NAME}/${ctx.message.forward_from_message_id}`;
 
     const imageUrl = await getImageURL(ctx.message.photo);
-    const content = `${ctx.message.caption} - ${imageUrl}`;
+    const description = `${ctx.message.caption ? `${ctx.message.caption} - ` : ''}${imageUrl}`;
 
-    console.log('photo', content, pubDate, itemURL);
+    Feed.addItem({
+      url,
+      date,
+      description,
+      title: `${date.toLocaleDateString('en', { dateStyle: 'medium' })} on ${CHAT_NAME}`,
+    });
   }),
 );
 

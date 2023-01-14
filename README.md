@@ -53,6 +53,7 @@ _Note: You need to create separate `.env.{NODE_ENV}` files for each environment(
 |---|---|---|
 |PORT|Number|File Server Port|
 |GROUP_ID|String|Your Channel ID|
+|BOT_TOKEN|String|Your Bot's API key|
 |GROUP_USERNAME|String|Your Channel Username|
 
 ## Available Scripts

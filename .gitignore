@@ -5,5 +5,6 @@ public/rss.xml
 
 .env*
 !.env
+!.env.example
 
 package-lock.json

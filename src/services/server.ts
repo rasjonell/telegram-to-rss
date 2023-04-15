@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 4444;
+const PORT = +process.env.PORT || 4444;
 
 app.use(cors());
 app.use(express.static('public'));

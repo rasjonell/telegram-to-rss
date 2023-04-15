@@ -1,5 +1,5 @@
-import { Context, NarrowedContext, Telegraf, Telegram } from 'telegraf';
-import { Message, PhotoSize, Update } from 'telegraf/typings/core/types/typegram';
+import { type Context, type NarrowedContext, Telegraf, Telegram } from 'telegraf';
+import type { Message, PhotoSize, Update } from 'telegraf/typings/core/types/typegram';
 
 import * as Feed from './feed';
 
@@ -32,7 +32,7 @@ const withValidation = <
 };
 
 const getImageURL = async (photos: PhotoSize[]): Promise<string> => {
-  const photoMeta = photos[photos.length - 1];
+  const photoMeta = photos.at(-1);
   const photoData = await TelegramClient.getFileLink(photoMeta.file_id);
 
   return photoData.toString();

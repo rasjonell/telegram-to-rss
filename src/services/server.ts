@@ -9,6 +9,6 @@ app.use(express.static('public'));
 
 export const launch = () => {
   app.listen(PORT, () => {
-    console.log(`[SERVER] Express Server is now running on ${PORT}`);
+    console.log('[SERVER] Express Server is now running on', PORT);
   });
 };

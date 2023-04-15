@@ -4,8 +4,8 @@ import { writeFile } from 'fs/promises';
 const NOW = new Date();
 const RSS_FILE_PATH = 'public/rss.xml';
 
-const { AUTHOR, WEBSITE_HOST, GROUP_USERNAME } = process.env;
-const FEED_URL = `${WEBSITE_HOST}/rss.xml`;
+const { PORT, AUTHOR, WEBSITE_HOST, GROUP_USERNAME } = process.env;
+const FEED_URL = `${WEBSITE_HOST}:${PORT}/rss.xml`;
 const COPYRIGHT = `${NOW.getFullYear()}: ${AUTHOR}`;
 
 const feed = new Feed({

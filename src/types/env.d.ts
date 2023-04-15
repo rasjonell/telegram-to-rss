@@ -10,6 +10,7 @@ declare namespace NodeJS {
     WEBSITE_HOST: string;
 
     // Server
+    PORT: string;
     NODE_ENV: 'dev' | 'test' | 'prod';
   }
 }

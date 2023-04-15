@@ -3,6 +3,11 @@ Generate an RSS feed from your Telegram Channel.
 
 ![Banner image](./banner.png)
 
+# Why did I make this?
+I run a personal website and want it to be a centralized place where I can have everything I ever published on the web. I also don't want to have a telegram integration on that website and prefer having a unified way of accessing my web artifacts.
+
+With the project I can turn my Telegram channel posts into RSS feed and parse it on my personal website.
+
 # How does it work?
 This Project is consisted of two distinct services:
   - Telegram Bot Handler
@@ -55,6 +60,8 @@ _Note: You need to create separate `.env.{NODE_ENV}` files for each environment(
 |GROUP_ID|String|Your Channel ID|
 |BOT_TOKEN|String|Your Bot's API key|
 |GROUP_USERNAME|String|Your Channel Username|
+|AUTHOR|String|RSS Feed Author Name|
+|WEBSITE_HOST|String|URL Of The RSS Feed Host Website|
 
 ## Available Scripts
 
@@ -64,6 +71,6 @@ _Note: You need to create separate `.env.{NODE_ENV}` files for each environment(
 
 ## TODOs
 
-- [ ] Make RSS feed metadata configurable
+- [x] Make RSS feed metadata configurable
 - [ ] Persist the auto-generated RSS Feed so stopping/restarting the process does not override it.
 - [ ] Make Feed generation configurable(Currently only the messages from the Channel admin are allowed, but some may want to also include discussion messages from other members(i.e. replies)).
